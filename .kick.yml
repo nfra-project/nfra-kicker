@@ -1,0 +1,21 @@
+# Kickstart container config file - see https://gitub.com/c7lab/kickstart
+# Run ./kickstart.sh to start a development-container for this project
+version: 1
+from: "infracamp/kickstart-flavor-base:testing"
+
+
+config_file:
+  template: "/opt/test/mock/test.in.txt"
+  target: "/tmp/test.out.txt"
+
+command:
+
+  build:
+    - composer update
+  dev:
+  - echo 'Hello world!'
+
+  test:
+    - "vendor/bin/ptest"
+  fail:
+    - exit 1

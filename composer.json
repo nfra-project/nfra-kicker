@@ -1,0 +1,36 @@
+{
+  "name": "nfra/kicker",
+  "type": "project",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "Matthias Leuffen",
+      "email": "matthias@leuffen.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Kick\\": "src/"
+    },
+    "files": [
+      "src/functions.inc.php"
+    ]
+  },
+  "require": {
+    "php": ">=7.1",
+    "ext-pcre": "*",
+    "ext-json": "*",
+    "ext-posix": "*",
+    "ext-pcntl": "*",
+    "symfony/yaml": "^5.0.4"
+  },
+  "bin": [
+    "bin/kick"
+  ],
+  "require-dev": {
+    "phore/tester": "dev-master",
+    "phore/core": "dev-master",
+    "phore/system": "dev-master",
+    "phore/filesystem": "dev-master"
+  }
+}
