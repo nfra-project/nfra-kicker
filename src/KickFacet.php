@@ -94,7 +94,7 @@ class KickFacet
                         $value = str_replace("\r\n", '\n', $value);
                         $value = str_replace("\n", '\n', $value);
                     }
-                    $env = "KICK_" . strtoupper($key) . "=$value";
+                    $env = "export KICK_" . strtoupper($key) . "=$value";
                     echo "$env\n";
                 }
 
@@ -102,10 +102,10 @@ class KickFacet
                     foreach ($this->config["env"] as $eName => $eVal)
                     {
                         if (is_int($eName)) {
-                            echo $eVal . "\n";
+                            echo "export " . $eVal . "\n";
                         } else {
                             $env = "$eName=$eVal";
-                            echo "$env\n";
+                            echo "export $env\n";
                         }
                     }
                 }
