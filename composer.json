@@ -28,5 +28,7 @@
     "bin/kick"
   ],
   "require-dev": {
+    "phore/tester": "*",
+    "phore/system": "*"
   }
 }

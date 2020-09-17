@@ -18,6 +18,7 @@ config_file:
 env:
   - SOME_ENV=Some value 
   - PATH="/some/path:$PATH"
+  - "SOME_ENV=${SOME_ENV:-defaultValue}"      # Define default environment
 
 command:
     command_name1:

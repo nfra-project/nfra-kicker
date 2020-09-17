@@ -48,7 +48,7 @@ class KickFacet
     public function __destruct()
     {
         if ($this->skipWriteStateFile == true)
-            return true;
+            return ;
         file_put_contents(self::CONF_STATE_FILE, serialize($this->execBox));
     }
 
@@ -137,14 +137,13 @@ class KickFacet
         if ( ! $value = access($this->config, ["command", $cmd])) {
             if (in_array($cmd, ["build", "init", "dev", "run", "interval"])) {
                 if ($cmd != "interval") {
-                    Out::warn("No command defined for '$cmd': Ignore!");
+                    Out::log("No command defined for '$cmd': Ignore!");
                 }
                 return true;
             }
             throw new \InvalidArgumentException("Command '$cmd' not defined in {$this->yamlFileName}.");
         }
         foreach ($value as $cur) {
-            Out::log("Target '$cur': ");
             $this->execBox->runBg($cur, $cmd);
         }
 
