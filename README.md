@@ -15,8 +15,10 @@ config_file:
   template: "config.php.dist"
   target: "config.php"
 
-packages: [package]
+# Install packages via apt-get
+packages: [package1, package2]
 
+# Set Environment Variables
 env:
   - SOME_ENV=Some value 
   - PATH="/some/path:$PATH"
