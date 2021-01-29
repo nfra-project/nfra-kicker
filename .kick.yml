@@ -3,7 +3,7 @@
 version: 1
 from: "nfra/kickstart-flavor-php:7.4"
 
-packages: ["nano"]k
+packages: ["nano"]
 
 config_file:
   template: "/opt/test/mock/test.in.txt"
