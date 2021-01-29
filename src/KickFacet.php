@@ -152,6 +152,19 @@ class KickFacet
             }
             throw new \InvalidArgumentException("Command '$cmd' not defined in {$this->yamlFileName}.");
         }
+
+        $installPackages = access($this->config, ["packages"]);
+        if ($cmd === "build" && $installPackages !== null) {
+            Out::log("Installing packages: ", implode(", ", $installPackages), " via apt");
+            system ("apt-get update");
+            system("apt-get install -y " . implode(" ", $installPackages), $result);
+            if ($result !== 0)
+                throw new \Exception("Installing packages via apt failed: " . implode(",", $installPackages));
+            system("rm -fR /var/lib/apt/lists/* /var/cache/apt/archives/*");
+        }
+
+        if ( ! is_array($value))
+            $value = [$value];
         foreach ($value as $cur) {
             $this->execBox->runBg($cur, $cmd);
         }

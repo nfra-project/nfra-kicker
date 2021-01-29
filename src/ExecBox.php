@@ -61,8 +61,15 @@ class ExecBox
                 exit ($ret);
             }
         } else {
-            Out::log("Exec syncronously: '$cmd'");
-            system($cmd, $ret);
+
+            if (strpos($cmd, "\n") !== false) {
+                Out::log("Exec syncronously (bash): '$cmd'");
+                system ("bash -c " . escapeshellarg($cmd));
+            } else {
+                Out::log("Exec syncronously: '$cmd'");
+                system($cmd, $ret);
+            }
+
             if ($ret != 0) {
                 Out::fail("system('$cmd') returned exit-code $ret (defined in .kick.yml: command:{$debugCmd}: - see output above for more information)");
                 exit ($ret);

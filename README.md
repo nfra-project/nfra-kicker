@@ -15,6 +15,8 @@ config_file:
   template: "config.php.dist"
   target: "config.php"
 
+packages: [package]
+
 env:
   - SOME_ENV=Some value 
   - PATH="/some/path:$PATH"
@@ -23,6 +25,11 @@ env:
 command:
     command_name1:
       - "script to exec (as user)"
+        
+    command_shell: |
+      if [ -f /some/file ]; then
+         echo "file found"
+      fi;
       
      
 ```

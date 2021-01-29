@@ -3,6 +3,7 @@
 version: 1
 from: "nfra/kickstart-flavor-php:7.4"
 
+packages: ["nano"]
 
 config_file:
   template: "/opt/test/mock/test.in.txt"
@@ -12,8 +13,8 @@ command:
 
   build:
     - composer update
-  dev:
-  - echo 'Hello world!'
+  dev: |
+      echo "Hello world! $DEV_MODE"
 
   test:
     - "vendor/bin/ptest"
