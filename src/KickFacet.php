@@ -9,6 +9,8 @@
 namespace Kick;
 
 
+use Kick\Tpl\TplWriter;
+
 class KickFacet
 {
 
@@ -113,6 +115,13 @@ class KickFacet
                 return true;
 
             case "write_config_file":
+                $tplDir = $this->workingDir . "/.kicker/conf";
+                if (is_dir($tplDir)) {
+                    Out::log("Copying config files from '$tplDir' -> '/'...");
+                    $tplWriter = new TplWriter();
+                    $tplWriter->parse($tplDir, "/");
+                    Out::log("Done");
+                }
                 if ( ! isset($this->config["config_file"])) {
                     return true;
                 }

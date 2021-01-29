@@ -40,3 +40,17 @@ function kicker_yaml_parse_file(string $filename)
     }
     return $ret;
 }
+
+
+function absolute_to_relative_uri(string $path, string $rootPath = "/")
+{
+    if (substr($path, 0, strlen($rootPath)) !== $rootPath)
+        throw new InvalidArgumentException("Path '$path' is not a child of root-path '$rootPath'");
+    $path = substr($path, strlen($rootPath));
+    while(true) {
+        if (substr($path, 0, 1) !== "/")
+            return $path;
+        $path = substr($path, 1);
+    }
+}
+

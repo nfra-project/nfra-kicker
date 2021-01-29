@@ -60,3 +60,11 @@ To correctly handle values, you should quote every placeholder:
 ```php
 define ("SOME_CONSTANT", "%ENV_NAME?default_value%");
 ```
+
+## Config Template
+
+Server Configuration can be stored in `.kicker/conf/<path>`. If this directory
+is present, all contents will be parsed and copied to the dedicated subfolder
+in the containers root file system.
+
+
