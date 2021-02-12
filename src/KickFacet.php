@@ -154,6 +154,9 @@ class KickFacet
         }
 
         $installPackages = access($this->config, ["packages"]);
+        if (is_string($installPackages))
+            $installPackages = explode(" ", $installPackages);
+
         if ($cmd === "build" && $installPackages !== null) {
             Out::log("Installing packages: ", implode(", ", $installPackages), " via apt");
             system ("sudo apt-get update");
