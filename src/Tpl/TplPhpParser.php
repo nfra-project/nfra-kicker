@@ -18,7 +18,7 @@ class TplPhpParser
         $output = "";
 
         // Use the current interpreter for evaling
-        exec("{$_SERVER["_"]} -f '" . escapeshellarg($this->inputFile) . "' 2>&1", $ret, $retVar);
+        exec("/kickstart/bin/_kick_php -f '" . escapeshellarg($this->inputFile) . "' 2>&1", $ret, $retVar);
         if ($retVar !== 0)
             throw new \Exception( implode("", $ret));
 
