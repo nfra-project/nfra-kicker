@@ -17,7 +17,8 @@ class TplPhpParser
     {
         $output = "";
 
-        exec("php -f '" . escapeshellarg($this->inputFile) . "' 2>&1", $ret, $retVar);
+        // Use the current interpreter for evaling
+        exec("{$_SERVER["_"]} -f '" . escapeshellarg($this->inputFile) . "' 2>&1", $ret, $retVar);
         if ($retVar !== 0)
             throw new \Exception( implode("", $ret));
 
