@@ -117,11 +117,14 @@ class KickFacet
             case "write_config_file":
                 $tplDir = $this->workingDir . "/.kicker/conf";
                 $defaultTplDir = "/kickstart/conf";
-                if (is_dir($tplDir)) {
+                if (is_dir($defaultTplDir)) {
                     Out::log("Copying container default config files from '$defaultTplDir' -> '/'...");
                     $tplWriter = new TplWriter();
                     $tplWriter->parse($defaultTplDir, "/");
                     Out::log("Done");
+                }
+                if (is_dir($tplDir)) {
+
                     Out::log("Copying config files from '$tplDir' -> '/'...");
                     $tplWriter = new TplWriter();
                     $tplWriter->parse($tplDir, "/");
