@@ -12,5 +12,5 @@ jobs:
     - name: Download Kickstart
       run: curl -o kickstart 'https://raw.githubusercontent.com/nfra-project/nfra-kickstart/master/dist/kickstart.sh' && chmod +x kickstart
     - name: UnitTests
-      run: ./kickstart.sh :test
+      run: ./kickstart :test
   
