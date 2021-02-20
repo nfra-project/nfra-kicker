@@ -37,7 +37,10 @@ class KickFacet
 
         if (file_exists(self::CONF_STATE_FILE)) {
             $this->execBox = unserialize(
-                file_get_contents(self::CONF_STATE_FILE)
+                file_get_contents(self::CONF_STATE_FILE),
+                [
+                    "allowed_classes" => [ ExecBox::class ]
+                ]
             );
         } else {
             $this->execBox = new ExecBox($this->workingDir);
@@ -61,6 +64,7 @@ class KickFacet
 
             case "":
             case "help":
+                $this->skipWriteStateFile = true;
                 echo "Kickstart command runner (evaluating /opt/.kick.yml)\n";
                 echo "\nUsage:";
                 echo "\n    kick [command]";
@@ -115,6 +119,7 @@ class KickFacet
                 return true;
 
             case "write_config_file":
+                $this->skipWriteStateFile = true;
                 $tplDir = $this->workingDir . "/.kicker/conf";
                 $defaultTplDir = "/kickstart/conf";
                 if (is_dir($defaultTplDir)) {
