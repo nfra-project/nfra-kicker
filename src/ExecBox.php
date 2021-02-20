@@ -21,6 +21,7 @@ class ExecBox
 
     private $pids = [];
 
+
     public function runBg ($cmd, $debugCmd="")
     {
         chdir($this->workingDir);

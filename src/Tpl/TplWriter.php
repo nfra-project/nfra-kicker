@@ -25,11 +25,12 @@ class TplWriter
 
                 $dir = dirname($outFile);
                 if ( ! is_dir($dir)) {
-                    Out::warn("Directory '$dir' not exsisting.");
+                    Out::log("Directory '$dir' not exsisting (creating it).");
                     if ( ! mkdir($dir, 0755, true) && !is_dir($dir))
-                    throw new \Exception("Cannot create directory '$dir'");
+                        throw new \Exception("Cannot create directory '$dir'");
                 }
-                file_put_contents($outFile, $content);
+                if ( ! file_put_contents($outFile, $content))
+                    throw new \Exception("Cannot write '$outFile'");
             } catch (\Exception $e) {
                 Out::fail("Error parsing '$curFile': " . $e->getMessage());
                 throw new \Exception("Error parsing '$curFile': " . $e->getMessage());
