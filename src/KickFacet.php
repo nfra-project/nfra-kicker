@@ -93,7 +93,6 @@ class KickFacet
                     if (is_array($value))
                         continue;
 
-
                     // Multiline Strings: eval "varname=$'Quaoted\nString'" (Dollar is new bash syntax)
                     // This is for backwards compatibility
                     $value = "\$" . escapeshellarg($value);

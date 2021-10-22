@@ -17,6 +17,6 @@ command:
       echo "Hello world! $DEV_MODE"
 
   test:
-    - "vendor/bin/ptest"
+    - "sudo -E vendor/bin/ptest"
   fail:
     - exit 1
