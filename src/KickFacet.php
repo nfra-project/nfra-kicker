@@ -154,17 +154,6 @@ class KickFacet
                 break;
         }
 
-
-        if ( ! $value = access($this->config, ["command", $cmd])) {
-            if (in_array($cmd, ["build", "init", "dev", "run", "interval"])) {
-                if ($cmd != "interval") {
-                    Out::log("No command defined for '$cmd': Ignore!");
-                }
-                return true;
-            }
-            throw new \InvalidArgumentException("Command '$cmd' not defined in {$this->yamlFileName}.");
-        }
-
         $installPackages = access($this->config, ["packages"]);
         if (is_string($installPackages))
             $installPackages = explode(" ", $installPackages);
@@ -177,6 +166,18 @@ class KickFacet
                 throw new \Exception("Installing packages via apt failed: " . implode(",", $installPackages));
             system("sudo rm -fR /var/lib/apt/lists/* /var/cache/apt/archives/*");
         }
+
+        if ( ! $value = access($this->config, ["command", $cmd])) {
+            if (in_array($cmd, ["build", "init", "dev", "run", "interval"])) {
+                if ($cmd != "interval") {
+                    Out::log("No command defined for '$cmd': Ignore!");
+                }
+                return true;
+            }
+            throw new \InvalidArgumentException("Command '$cmd' not defined in {$this->yamlFileName}.");
+        }
+
+
 
         if ( ! is_array($value))
             $value = [$value];
